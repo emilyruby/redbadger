@@ -38,6 +38,10 @@ def execute_sequence(start_x, start_y, direction, sequence, width, height):
     return str([(current_x, current_y), current_dir])
 
 
+def change_input(a):
+    return list(map(lambda k: int(k), a))
+
+
 def martian_robots(data):
     """
     INPUT: Presume data structure for now is structure such as:
@@ -54,12 +58,13 @@ def martian_robots(data):
     result = [[(3, 3), 'N']] for each robot.
     """
 
-    width, height = list(map(lambda k: int(k), data[0].split(" ")))
+    width, height = change_input(data[0].split(" "))
     end_positions = []
 
     for robot in range(1, len(data), 2):
 
-        start_x, start_y, direction = data[robot].split(" ")
+        *start, direction = data[i].split(" ")
+        start = change_input(start)
         sequence = data[robot + 1]
 
         end_sequence.append(
