@@ -8,7 +8,7 @@ def execute_sequence(start_x, start_y, direction, sequence, width, height):
     result = [[(3, 3), 'N']]
     """
 
-    directions = ["N", "E", "S", "W"]
+    dirs = ["N", "E", "S", "W"]
     turn_map = {
         "R": 1,
         "L": -1
@@ -21,21 +21,21 @@ def execute_sequence(start_x, start_y, direction, sequence, width, height):
     }
 
     current_x, current_y = int(start_x), int(start_y)
-    current_direction = direction
+    current_dir = direction
 
     for ins in sequence:
 
         previous_x, previous_y = current_x, current_y
         if ins == "F":
-            current_x += moves[current_direction][0]
-            current_y += moves[current_direction][1]
+            current_x += moves[current_dir][0]
+            current_y += moves[current_dir][1]
         else:
-            current_direction_index = (directions.index(curr_direction) + turn_map[ins]) % 4
-            current_direction = directions[current_direction_index]
+            current_dir_index = (dirs.index(current_dir) + turn_map[ins]) % 4
+            current_dir = dirs[current_dir_index]
         if not (0 <= current_x <= width and 0 <= current_y <= height):
-            return str([(previous_x, previous_y), current_direction] + 'LOST')
+            return str([(previous_x, previous_y), current_dir] + 'LOST')
 
-    return str([(current_x, current_y), current_direction])
+    return str([(current_x, current_y), current_dir])
 
 
 def martian_robots(data):
@@ -51,7 +51,7 @@ def martian_robots(data):
 
     OUTPUT: Coordinates of finishing point, plus orientation in format:
 
-    result = [[(3, 3), 'N']]
+    result = [[(3, 3), 'N']] for each robot.
     """
 
     width, height = list(map(lambda k: int(k), data[0].split(" ")))
