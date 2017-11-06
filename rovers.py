@@ -20,7 +20,22 @@ def execute_sequence(start_x, start_y, direction, sequence, width, height):
         "W": [-1, 0]
     }
 
-    
+    current_x, current_y = int(start_x), int(start_y)
+    current_direction = direction
+
+    for ins in sequence:
+
+        previous_x, previous_y = current_x, current_y
+        if ins == "F":
+            current_x += moves[current_direction][0]
+            current_y += moves[current_direction][1]
+        else:
+            current_direction_index = (directions.index(curr_direction) + turn_map[ins]) % 4
+            current_direction = directions[current_direction_index]
+        if not (0 <= current_x <= width and 0 <= current_y <= height):
+            return str([(previous_x, previous_y), current_direction] + 'LOST')
+
+    return str([(current_x, current_y), current_direction])
 
 
 def martian_robots(data):
