@@ -1,8 +1,26 @@
 def return_string(values):
+    """
+    Input: List of values representing the position of the robot.
+
+    Output: Formatted string of robot position, for example:
+
+    'X Y DIRECTION (LOST)'
+    """
+
     return " ".join(list(map(lambda k: str(k), values)))
 
 
 def execute_sequence(start, direction, sequence, width, height):
+    """
+    Input:  Start co-ordinates, starting orientation, sequence of commands,
+            width of grid, height of grid.
+    Output: String representing the end position and orientation of the robot
+            in the format:
+
+    'X Y DIRECTION (LOST)'
+
+    Lost is appended to the string if the robot at any point leaves the grid.
+    """
 
     dirs = ["N", "E", "S", "W"]
     TOTAL_DIRECTIONS = len(dirs)
@@ -38,10 +56,28 @@ def execute_sequence(start, direction, sequence, width, height):
 
 
 def modify_input(a):
+    """
+    Input: List of strings/characters.
+    Output: List of integers.
+    """
+
     return list(map(lambda k: int(k), a))
 
 
 def martian_robots(data):
+    """
+    Input: Data representing the task, in the format (for example):
+
+    [
+        "GRID_WIDTH GRID_HEIGHT",
+        "X Y DIRECTION", "SEQUENCE OF COMMANDS",
+        "3 2 N", "FRRFLLFFRRFLL"
+    ]
+
+    Output: A string representing the end positions of all robots in the data
+            (separated by a new line).
+    """
+
     width, height = modify_input(data[0].split(" "))
     end_positions = []
 
